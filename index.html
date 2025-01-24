@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year 2025</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #6a1b9a, #00bcd4);
+    color: white;
+    text-align: center;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.container {
+    position: relative;
+    z-index: 10;
+}
+
+#balloon {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff4081;
+    padding: 30px;
+    border-radius: 20px;
+    display: inline-block;
+    position: relative;
+    animation: floatBalloon 3s ease-in-out infinite;
+}
+
+#year {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+#newYearMessage {
+    font-size: 3rem;
+    margin-top: 20px;
+    animation: textGlow 1.5s ease-in-out infinite alternate;
+}
+
+#newYear {
+    color: #ff4081;
+}
+
+#changeYearBtn {
+    background-color: #ff4081;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#changeYearBtn:hover {
+    background-color: #d500f9;
+}
+
+@keyframes floatBalloon {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(5deg);
+    }
+    100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+}
+
+@keyframes textGlow {
+    0% {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.4);
+    }
+    100% {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.8);
+    }
+}
+
+/* Confetti */
+#confetti {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Add custom styling for confetti */
+.confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #ff4081;
+    animation: confettiFall 2s ease-out forwards;
+}
+
+@keyframes confettiFall {
+    0% {
+        opacity: 1;
+        transform: translateY(-1000px) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+    </style>>
+</head>
+<body>
+    <div class="container">
+        <div id="balloon">
+            <span id="year">2024</span>
+        </div>
+        <h1 id="newYearMessage">Get ready for the New Year! This Upcomming year change your entire life</h1>
+        <button id="changeYearBtn">let's starts the journey</button>
+    </div>
+
+    <div id="confetti"></div>
+    <audio id="audio" src="happy-new-year.mp3"></audio>
+
+    <script>
+// Function to change the year from 2024 to 2025
+function changeYear() {
+    const yearElement = document.getElementById("year");
+    let yearString = yearElement.innerText.split('');
+
+    // Replace 4 with 5 after a short delay
+    setTimeout(() => {
+        if (yearString[3] === '4') {
+            yearString[3] = '5';
+            yearElement.innerText = yearString.join('');
+        }
+    }, 1000); // 1 second delay to simulate the change
+
+    // After the change, display Happy New Year!
+    setTimeout(() => {
+        document.getElementById("newYearMessage").innerText = "Happy New Year!";
+        document.getElementById("newYear").innerText = "2025";
+        playAudio();
+        startConfetti();
+    }, 2000); // Show Happy New Year after 2 seconds
+}
+
+// Function to play audio when New Year hits
+function playAudio() {
+    const audio = document.getElementById("audio");
+    audio.play();
+}
+
+// Function to generate confetti
+function startConfetti() {
+    const confettiContainer = document.getElementById("confetti");
+    for (let i = 0; i < 200; i++) {
+        const confettiPiece = document.createElement("div");
+        confettiPiece.classList.add("confetti-piece");
+        confettiPiece.style.left = `${Math.random() * 100}vw`;
+        confettiPiece.style.animationDelay = `${Math.random() * 2}s`;
+        confettiPiece.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confettiContainer.appendChild(confettiPiece);
+    }
+}
+
+// Add event listener to the button to trigger year change
+document.getElementById("changeYearBtn").addEventListener("click", changeYear);
+
+    </script>
+</body>
+</html>
